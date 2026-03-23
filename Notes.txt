@@ -1,0 +1,10 @@
+Project -> Ask your PDF RAG (also working with PDF, Txt File and Website URLS)
+
+
+Flow of the Project:
+1. We can upload a PDF file
+2. We can ask a question about the pdf file
+3. We can get the answer to the question from the content of pdf and it will work as context for LLM
+
+
+## Better model for embeddings in Ollama -> model="nomic-embed-text"
