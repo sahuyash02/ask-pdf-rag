@@ -114,16 +114,18 @@ def answer_query(vector_store, query):
     ANSWER:
     """
     try:
-        response = model.invoke(prompt)
-        return response.content
+        for chunk in model.stream(prompt):
+            yield chunk.content
     except Exception as e:
-        return f"Error: {e}"
+        yield f"Error: {e}"
     
 
 
-# --- for testing in terminal ---
+# # --- for testing in terminal ---
 # # run the code
+# docs_path = "C:/Users/Yash/Downloads/Yash Sahu/RAG/Ask Your PDF RAG/testing.pdf"
 # vector_store = pdf_to_vector_store(docs_path)
-# query = "What is langchain?"
+# query = input("Enter Question: ")
+# # query = "What is langchain?"
 # response = answer_query(vector_store, query)
 # print(response)

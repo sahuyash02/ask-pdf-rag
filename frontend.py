@@ -2,7 +2,7 @@ from pydoc import doc
 import streamlit as st
 # from main import pdf_to_vector_store, answer_query, url_to_vector_store, text_file_to_vector_store
 from main_open_source import answer_query, pdf_to_vector_store, url_to_vector_store, text_file_to_vector_store
-from main import answer_query, pdf_to_vector_store, url_to_vector_store, text_file_to_vector_store
+# from main import answer_query, pdf_to_vector_store, url_to_vector_store, text_file_to_vector_store
 
 st.title("Ask Question from Provided Source")
 
@@ -78,9 +78,10 @@ if st.session_state['vector_store'] is not None:
 
         # Display assistant response in chat message container
         with st.chat_message("assistant"):
-            with st.spinner("Getting Answer..."):
-                response = answer_query(st.session_state['vector_store'], query)
-            st.markdown(response)  #
+            # stream the response token by token 
+            response = st.write_stream(
+                answer_query(st.session_state['vector_store'], query)
+            )
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": response})
 
